@@ -75,31 +75,19 @@ As the user moves closer to the laptop, the time between beeps decreases, creati
 
 ## Software Design
 
-The program follows this sequence:
+The program continuously measures the distance between the user and the laptop using the HC-SR04 ultrasonic sensor.
 
-    Measure Distance
-           ↓
-    Calculate Distance
-           ↓
-    Check Distance Range
-           ↓
-    Select Beep Interval
-           ↓
-    Control Passive Buzzer
-           ↓
-    Measure Again
+The `pulseIn()` function is used to measure the ultrasonic echo time.
 
-The pulseIn() function is used to measure the ultrasonic echo time.
+The `tone()` and `noTone()` functions control the passive buzzer.
 
-The tone() and noTone() functions control the passive buzzer.
-
-The millis() function is used to control the beep timing without blocking continuous sensor monitoring.
+The `millis()` function is used to control the beep timing without blocking continuous sensor monitoring.
 
 A 15 ms timeout is used for the ultrasonic echo measurement. If no valid echo is received, the buzzer is turned off.
 
 ## Prototype
 
-The ultrasonic sensor was positioned above the laptop screen to measure the distance between the user and the laptop. The Arduino and passive buzzer were connected to the sensor for real-time warning feedback.
+The ultrasonic sensor was positioned above the laptop screen to measure the distance between the user and the laptop. The Arduino and passive buzzer provide real-time warning feedback.
 
 Prototype images are available in the "Photos and videos" folder.
 
@@ -162,9 +150,9 @@ Through this project, I gained practical experience in:
 
 - Interfacing an HC-SR04 ultrasonic sensor with Arduino
 - Measuring distance using ultrasonic echo timing
-- Working with pulseIn() and sensor timeouts
-- Controlling a passive buzzer using tone() and noTone()
-- Using millis() for non-blocking timing
+- Working with `pulseIn()` and sensor timeouts
+- Controlling a passive buzzer using `tone()` and `noTone()`
+- Using `millis()` for non-blocking timing
 - Designing distance-based alert logic
 - Testing and tuning distance thresholds
 - Understanding blocking and non-blocking program logic
@@ -174,8 +162,8 @@ Through this project, I gained practical experience in:
 
 - Arduino documentation
 - HC-SR04 ultrasonic sensor documentation/datasheet
-- Arduino tone() and noTone() documentation
-- Arduino millis() documentation
+- Arduino `tone()` and `noTone()` documentation
+- Arduino `millis()` documentation
 - Online Arduino tutorials used as initial references
 
 The initial concept and sensor implementation were inspired by online Arduino tutorials. The distance-based warning logic and progressive buzzer behavior were developed and modified for this project.
