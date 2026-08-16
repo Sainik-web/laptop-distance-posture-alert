@@ -114,7 +114,7 @@ The Arduino calculates the distance using the measured echo time.
 
 
 
-\*\*Distance = (Echo Time × 0.0343) / 2\*\*
+Distance = (Echo Time × 0.0343) / 2
 
 
 
