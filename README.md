@@ -114,69 +114,7 @@ The Arduino calculates the distance using the measured echo time:
 
 
 
-\*\*Distance = (Echo Time × 0.0343) / 2\*\*
-
-
-
-The calculated distance is then compared with predefined thresholds. Based on the measured distance, the Arduino selects an appropriate buzzer interval.
-
-
-
-The buzzer operates at a constant tone frequency of 3000 Hz. Only the time between beeps changes.
-
-
-
-\### Distance-Based Alert Logic
-
-
-
-| Distance | Warning Level | Buzzer Behavior |
-
-|---|---|---|
-
-| > 45 cm | Safe | Silent |
-
-| > 40 to 45 cm | Initial Warning | Slow beep - 1000 ms interval |
-
-| > 36 to 40 cm | Increased Warning | Faster beep - 400 ms interval |
-
-| <= 36 cm | High Warning | Very fast beep - 100 ms interval |
-
-
-
-As the user moves closer to the laptop, the time between beeps decreases, creating a progressively stronger warning.
-
-
-
-\## Software Design
-
-
-
-The program follows this basic sequence:
-
-
-
 ```text
 
-Measure Distance
-
-&#x20;      ↓
-
-Calculate Distance
-
-&#x20;      ↓
-
-Check Distance Range
-
-&#x20;      ↓
-
-Select Beep Interval
-
-&#x20;      ↓
-
-Control Passive Buzzer
-
-&#x20;      ↓
-
-Measure Again
+Distance = (Echo Time × 0.0343) / 2
 
