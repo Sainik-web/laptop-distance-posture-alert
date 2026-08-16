@@ -32,7 +32,7 @@ The project was developed as a hands-on application of ultrasonic distance measu
 
 \- Continuously measure the user's distance from the laptop using an HC-SR04 ultrasonic sensor.
 
-\- Use distance as a simple indicator of excessive proximity to the screen.
+\- Use distance as an indicator of excessive proximity to the screen.
 
 \- Provide real-time audio feedback using a passive buzzer.
 
@@ -52,7 +52,9 @@ The project was developed as a hands-on application of ultrasonic distance measu
 
 \- Progressive distance-based buzzer warning
 
-\- Constant buzzer tone with variable beep rate
+\- Constant 3000 Hz buzzer tone
+
+\- Variable beep rate based on distance
 
 \- Non-blocking buzzer timing using `millis()`
 
@@ -96,7 +98,7 @@ The project was developed as a hands-on application of ultrasonic distance measu
 
 | 5V | HC-SR04 VCC |
 
-| GND | HC-SR04 GND + Buzzer GND |
+| GND | HC-SR04 GND and Buzzer GND |
 
 
 
@@ -112,7 +114,69 @@ The Arduino calculates the distance using the measured echo time:
 
 
 
+\*\*Distance = (Echo Time × 0.0343) / 2\*\*
+
+
+
+The calculated distance is then compared with predefined thresholds. Based on the measured distance, the Arduino selects an appropriate buzzer interval.
+
+
+
+The buzzer operates at a constant tone frequency of 3000 Hz. Only the time between beeps changes.
+
+
+
+\### Distance-Based Alert Logic
+
+
+
+| Distance | Warning Level | Buzzer Behavior |
+
+|---|---|---|
+
+| > 45 cm | Safe | Silent |
+
+| > 40 to 45 cm | Initial Warning | Slow beep - 1000 ms interval |
+
+| > 36 to 40 cm | Increased Warning | Faster beep - 400 ms interval |
+
+| <= 36 cm | High Warning | Very fast beep - 100 ms interval |
+
+
+
+As the user moves closer to the laptop, the time between beeps decreases, creating a progressively stronger warning.
+
+
+
+\## Software Design
+
+
+
+The program follows this basic sequence:
+
+
+
 ```text
 
-Distance = (Echo Time × 0.0343) / 2
+Measure Distance
+
+&#x20;      ↓
+
+Calculate Distance
+
+&#x20;      ↓
+
+Check Distance Range
+
+&#x20;      ↓
+
+Select Beep Interval
+
+&#x20;      ↓
+
+Control Passive Buzzer
+
+&#x20;      ↓
+
+Measure Again
 
